@@ -1,0 +1,12 @@
+[ 
+ {
+    "name": "sugeetha",
+    "location": "Bangalore",
+    "courses": ["UIautomation", "RestAPI"]
+},
+ {
+    "name": "Nandhakumar",
+    "location": "Bangalore",
+    "courses": ["AWS", "RestAPI"]
+}
+]
