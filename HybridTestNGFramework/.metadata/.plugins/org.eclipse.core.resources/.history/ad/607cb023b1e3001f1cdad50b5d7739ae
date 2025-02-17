@@ -1,0 +1,51 @@
+package com.techninja.qa.testcases;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+
+public class screenshotTest {
+	public static void main(String[] args) {
+        // Set the path for the ChromeDriver (update the path as per your system)
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+
+        // Initialize ChromeDriver
+        WebDriver driver = new ChromeDriver();
+
+        try {
+            // Open a website
+            driver.get("https://www.google.com");
+
+            // Take a screenshot
+            takeScreenshot(driver, "GoogleHomepage.png");
+
+        } finally {
+            // Close the browser
+            driver.quit();
+        }
+    }
+
+    public static void takeScreenshot(WebDriver driver, String filename) {
+        try {
+            // Capture screenshot as File
+            File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+
+            // Define the destination path
+            File destination = new File(System.getProperty("user.dir") + "/screenshot/" + "homepage.png");
+
+            // Ensure the directory exists
+            destination.getParentFile().mkdirs();
+
+            // Copy the screenshot file
+            Files.copy(screenshot.toPath(), destination.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+            System.out.println("Screenshot saved at: " + destination.getAbsolutePath());
+        } catch (IOException e) {
+            System.out.println("Failed to save screenshot: " + e.getMessage());
+        }
+    }
+}

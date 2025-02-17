@@ -1,0 +1,27 @@
+package com.techninja.qa.pageobject;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+public class RegisterPage {
+	
+	WebDriver driver;
+     
+	//Object
+	@FindBy (id="input-firstname")
+	private WebElement firstNameField;
+	
+	//Constructor
+	public RegisterPage (WebDriver driver) {
+		this.driver=driver;
+		PageFactory.initElements(driver, this);
+	}
+	
+	//Action
+	
+	public void enterEmailAddress(String firstNameText) {
+		firstNameField.sendKeys(firstNameText);
+	}
+}

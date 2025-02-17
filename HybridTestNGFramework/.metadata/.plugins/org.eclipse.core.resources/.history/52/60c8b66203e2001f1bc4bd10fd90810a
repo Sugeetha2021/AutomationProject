@@ -1,0 +1,48 @@
+package com.techninja.qa.pageobject;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+public class RegisterPage {
+	
+	WebDriver driver;
+     
+	//Object
+	@FindBy (id="input-firstname")
+	private WebElement firstNameField;
+	
+	@FindBy (id="input-lastname")
+	private WebElement lastNameField;
+	
+	@FindBy (id="iinput-email")
+	private WebElement emailField;
+	
+	@FindBy (id="input-telephone")
+	private WebElement telephoneField;
+	
+	@FindBy (id="input-password")
+	private WebElement passwordField;
+	
+	@FindBy (id="input-confirm")
+	private WebElement confirmPasswordField;
+	
+	@FindBy (xpath="(//input[@name='newsletter'])[2]\"")
+	private WebElement newsletterField;
+	
+	@FindBy (name="agree")
+	private WebElement agreeField;
+	
+	//Constructor
+	public RegisterPage (WebDriver driver) {
+		this.driver=driver;
+		PageFactory.initElements(driver, this);
+	}
+	
+	//Action
+	
+	public void enterEmailAddress(String firstNameText) {
+		firstNameField.sendKeys(firstNameText);
+	}
+}

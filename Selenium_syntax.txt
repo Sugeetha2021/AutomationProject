@@ -1,0 +1,55 @@
+1.handle alerts:
+Alert alert = driver.switchTo().alert();
+alert.accept(); // To click OK
+alert.dismiss(); // To click Cancel
+alert.sendKeys("Hello, TestNG!"); 
+String alertText = alert.getText(); // To get the alert message
+------------------------------------------------------------------------
+2.handle a dropdown in Selenium:
+Select dropdown = new Select(driver.findElement(By.id("dropdownId")));
+dropdown.selectByVisibleText("Option1");
+dropdown.selectByValue("value1");
+dropdown.selectByIndex(2);
+
+Yes! Using JavaScriptExecutor or Actions Class:
+
+WebElement dropdown = driver.findElement(By.id("dropdownId"));
+dropdown.click();
+driver.findElement(By.xpath("//option[text()='Option1']")).click();
+
+JavascriptExecutor js = (JavascriptExecutor) driver;
+js.executeScript("arguments[0].click();", dropdown);
+---------------------------------------------------------------------------
+3. perform cross-browser testing:
+WebDriver driver;
+public WebDriver initializeBrowserAndOpenAppURL(String browserName) {
+	
+	
+	if (browserName.equalsIgnoreCase("chrome")) {
+		
+		driver =new ChromeDriver();
+		
+	}else if(browserName.equalsIgnoreCase("firefox")) {
+		
+		driver =new FirefoxDriver();
+		
+	}else if(browserName.equalsIgnoreCase("edge")) {
+		
+		driver =new EdgeDriver();
+		
+	}else if(browserName.equalsIgnoreCase("safari")) {
+			
+			driver =new SafariDriver();
+	}
+	driver= initializeBrowserAndOpenAppURL(prop.getProperty("browser"));
+	----------------------------------------------------------------------------
+4.file upload in Selenium
+From the system Downloads:
+
+Driver.findelements(By.id(“uploadFile”)).sendKeys("C:\\path\\to\\file.txt");
+
+From the Project folder file:
+
+String ProjectPath= system.getProperty(“user.dir”);
+Driver.findelements(By.id(“uploadFile”)).
+sendkeys(projectPath+\\file\\wave.jpg);

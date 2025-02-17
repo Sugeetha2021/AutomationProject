@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [TechNinjawebpabes automation suit]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="TechNinjaTest(failed)">
+    <classes>
+      <class name="com.techninja.qa.testcases.Login">
+        <methods>
+          <include name="tearDown"/>
+          <include name="setup"/>
+          <include name="verifyLoginWithInvalidEmailWithValidpasswordCredentilas"/>
+        </methods>
+      </class> <!-- com.techninja.qa.testcases.Login -->
+    </classes>
+  </test> <!-- TechNinjaTest(failed) -->
+</suite> <!-- Failed suite [TechNinjawebpabes automation suit] -->

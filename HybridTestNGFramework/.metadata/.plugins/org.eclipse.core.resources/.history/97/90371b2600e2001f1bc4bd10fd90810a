@@ -1,0 +1,5 @@
+package com.techninja.qa.pageobject;
+
+public class RegisterPage {
+
+}

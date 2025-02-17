@@ -1,0 +1,43 @@
+package day3;
+import org.testng.annotations.Test;
+import io.restassured.response.Response;
+
+import static io.restassured.RestAssured.*;
+import static io.restassured.matcher.RestAssuredMatchers.*;
+import static org.hamcrest.Matchers.*;
+
+public class HeaderDemo {
+//@Test (priority=1)
+	void testHeaders()
+
+	{
+		
+		given()
+		
+		.when()
+	       .get("https://www.google.com/")
+	       
+		.then()
+		 .header("Content-Type","text/html; charset=ISO-8859-1")
+		 .header("Content-Encoding","gzip")
+		 .header("Server","gws");
+		// .log().all();
+
+	}
+@Test (priority=1)
+void testgetHeaders()
+
+{
+	
+	Response res=given()
+	
+	.when()
+       .get("https://www.google.com/");
+       
+	//To get the single header details
+	
+	String header_value=res.getHeader("Content-Type");
+	System.out.println("The value of Content-type header is:"+header_value);
+
+}
+}

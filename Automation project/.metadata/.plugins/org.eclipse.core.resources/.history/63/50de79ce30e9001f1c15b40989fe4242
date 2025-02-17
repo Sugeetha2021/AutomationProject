@@ -1,0 +1,126 @@
+package Day2;
+import org.testng.annotations.Test;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+import org.testng.annotations.Test;
+import static io.restassured.RestAssured.*;
+import static io.restassured.matcher.RestAssuredMatchers.*;
+import static org.hamcrest.Matchers.*;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.nio.file.FileSystems;
+import java.nio.file.Paths;
+import java.util.HashMap;
+
+public class Waystocreateapostrequestbody {
+	int id;
+	@Test(priority=1)
+	void testPostusingHashmap()
+	{
+		HashMap data=new HashMap();
+		data.put("name","sugeetha");
+		data.put("job", "Lead test");
+		//String courseArr[]= {"C++","RestAPI"};
+		//data.put("courses", courseArr);
+		
+		given()
+		.contentType("application/json")
+		.body(data)
+		
+		.when()
+		  .post("https://reqres.in/api/users")
+		
+		.then()
+		  .statusCode(201)
+		 .body("name",equalTo("sugeetha"))
+		 .body("job",equalTo("Lead test"))
+		 // .body("courses[0]",equalTo("C++"))
+		 // .body("courses[1]",equalTo("RestAPI"))
+		 // .header("Content-Type","application/json; charset=utf-8")
+		  .log().all();
+		
+	}
+	@Test(priority=3)
+	void testDelete()
+	{
+		given()
+		
+		.when()
+		.delete("http://localhost:3000/students/9a07")
+		
+		.then()
+		  .statusCode(200);
+		
+		
+	}
+//	@Test(priority=2)
+	void testPostusingJsonLibrary()
+	{
+		JSONObject data=new JSONObject();
+		
+		data.put("name", "sweety");
+		data.put("location", "Tirupati");
+		
+		String courseArr[]= {"C++","RestAPI"};
+		data.put("courses", courseArr);
+		
+		given()
+		.contentType("application/json")
+		.body(data.toString())
+		
+		.when()
+		  .post("http://localhost:3000/students")
+		  .then()
+		  .statusCode(201)
+		  //.body("name", "sweety")
+		  .log().all();
+		
+		
+	}
+	@Test
+	void testPostusingPOJOClass()
+	{
+		Pojo_postrequest data=new Pojo_postrequest();
+		data.setName("Vanisivaji");
+		data.setLocation("USA");
+		String coursesArr[]= {"c","python"};
+		data.setCourses(coursesArr);
+		
+		
+		given()
+		.contentType("application/json")
+		.body(data)
+		
+		.when()
+		  .post("http://localhost:3000/students")
+		  .then()
+		  .statusCode(201)
+		  //.body("name", "sweety")
+		  .log().all();
+		
+	}
+//	@Test
+	//void testPostusingExternalJsonfile() 
+	{
+		//File f=new File(".//data.json");
+		
+		//FileReader fr=new FileReader(f);
+		
+		//JSONTokener jt=new JSONTokener(fr);
+		
+		//JSONObject data=new JSONObject(jt);
+		
+		given()
+		.contentType("application/json")
+		//.body(data)
+		
+		.when()
+		  .post("http://localhost:3000/students")
+		  .then()
+		  .statusCode(201)
+		  //.body("name", "sweety")
+		  .log().all();
+	}
+}

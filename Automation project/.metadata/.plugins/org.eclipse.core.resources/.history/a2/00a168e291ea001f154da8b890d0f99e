@@ -1,0 +1,59 @@
+package day4;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import io.restassured.response.Response;
+
+import static io.restassured.RestAssured.*;
+import static io.restassured.matcher.RestAssuredMatchers.*;
+import static org.hamcrest.Matchers.*;
+
+import org.json.JSONObject;
+
+public class ParsingJSONResponseData {
+	@Test
+	void testResponse()
+	
+	{
+		//Approach1
+	/*	given()
+		     .header("ContentType","application/json; charset=utf-8")
+		     .contentType("ContentTye.JSON")
+		
+		.when()
+		      .get("http://localhost:3000/store")
+		
+		.then()
+		.statusCode(200)
+		.body("book[1].price", equalTo("300"))
+		.body("book[1].categoery", equalTo("AI"))
+		.body("book[1].title",equalTo("AI book"))
+		//.log().body();*/
+		
+		//Approach2
+		Response res=given()
+	     .contentType("ContentTye.JSON")
+	
+	.when()
+	      .get("http://localhost:3000/book");
+	    Assert.assertEquals(res.getStatusCode(),200);//validation 1
+	    //Assert.assertEquals(res.header("Content-Type"),"application/json; application/json");
+	    
+	  // String bookname= res.jsonPath().get("book[2].title").toString();
+	   //Assert.assertEquals(bookname,"AI book");
+		
+	    JSONObject jo=new JSONObject(res.toString());//converting response into JSONObject type
+	    for(int i=0;i<jo.getJSONArray("book").length();i++)
+	    {
+	    	String booktitle=jo.getJSONArray("book").getJSONObject(i).get("title").toString();
+	    	System.out.println(booktitle);
+	    	
+	    }
+	    }
+	    
+	    
+	    
+	}
+
+
